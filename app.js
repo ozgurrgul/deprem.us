@@ -2,7 +2,7 @@ var express = require('express')
 var nunjucks = require('nunjucks')
 var request = require('request')
 var cheerio = require('cheerio')
-var PORT = 6767
+var PORT = process.env.PORT || 6767
 
 var app = express()
 var nunjucks = require('nunjucks')
