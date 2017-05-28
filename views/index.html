@@ -49,7 +49,7 @@
         {% for row in earthquakesArray %}
         <tr>
             <td>{{row.date}}</td>
-            <td><strong class="{{ 'red-font' if (row.force > 4) else '' }}">{{row.force}}</strong></td>
+            <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
             <td>{{row.depth}}</td>
             <td>
                 <a
