@@ -39,9 +39,9 @@ function fetchEarthquakes() {
 function earthquakesToObjectArray(rows) {
 
     var arr = []
-    var length = EARTHQUAKES_ARRAY_LENGTH + 8
+    var length = EARTHQUAKES_ARRAY_LENGTH + 6
 
-    for (var i = 8; i < length; i++) {
+    for (var i = 6; i < length; i++) {
         var row = rows[i]
 
         if(!row) {
