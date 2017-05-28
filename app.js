@@ -93,7 +93,7 @@ function fetchEarthquakesRecursive() {
             var rows = earthquakes.split("\n")
             earthquakesArray = earthquakesToObjectArray(rows)
 
-            setTimeout(fetchEarthquakesRecursive, 1000 * 10)
+            setTimeout(fetchEarthquakesRecursive, 1000 * 60)
         })
         .catch(console.log)
 }
