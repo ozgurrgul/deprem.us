@@ -8,7 +8,7 @@ var app = express()
 var nunjucks = require('nunjucks')
 var env = nunjucks.configure('views', { autoescape: true, express: app })
 
-var EARTHQUAKES_ARRAY_LENGTH = 100
+var EARTHQUAKES_ARRAY_LENGTH = 200
 var earthquakesArray = []
 
 app.get("*", function (req, res) {
