@@ -5,7 +5,6 @@ var cheerio = require('cheerio')
 var PORT = process.env.PORT || 6767
 
 var app = express()
-var nunjucks = require('nunjucks')
 var env = nunjucks.configure('views', { autoescape: true, express: app })
 
 var EARTHQUAKES_ARRAY_LENGTH = 200
