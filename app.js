@@ -20,15 +20,20 @@ function fetchEarthquakes() {
 
     return new Promise(function (resolve, reject) {
 
+        // sayfaya GET isteği at
         request(url, function (err, res, body) {
 
             if(err) {
                 return reject(err)
             }
 
+            // gelen cevabı cheerio kütüphanesi ile oku
             var $ = cheerio.load(body)
+
+            // deprem listesi sayfadaki <pre> tagı içinde
             var responseStr = $("pre").html()
 
+            // string olarak döndür
             resolve(responseStr)
         })
 
@@ -40,7 +45,9 @@ function earthquakesToObjectArray(rows) {
     var arr = []
     var length = EARTHQUAKES_ARRAY_LENGTH + 6
 
+    // veriler <pre> tagları arasındaki 6. satırdan itibaren başlıyor
     for (var i = 6; i < length; i++) {
+
         var row = rows[i]
 
         if(!row) {
@@ -62,10 +69,12 @@ function earthquakesToObjectArray(rows) {
         var town = row[8]
         var city = row[9]
 
+        // updatedForce var ise onu kullan
         if(updatedForce != "-.-") {
             force = updatedForce
         }
 
+        // ilksel
         if(city == '&#xFFFD;lksel') {
             city = ''
         }
@@ -89,7 +98,10 @@ function fetchEarthquakesRecursive() {
     fetchEarthquakes()
         .then(function (earthquakes) {
 
+            //<pre> tag içindeki veriyi satırlara bölecek şekilde array oluştur
             var rows = earthquakes.split("\n")
+
+            // global earthquakesArray değişkenini oluştur
             earthquakesArray = earthquakesToObjectArray(rows)
 
             setTimeout(fetchEarthquakesRecursive, 1000 * 60)
@@ -98,7 +110,6 @@ function fetchEarthquakesRecursive() {
 }
 
 fetchEarthquakesRecursive()
-
 
 app.listen(PORT, function () {
     console.log("running on port:", PORT)
