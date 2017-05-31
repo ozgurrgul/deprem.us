@@ -8,10 +8,25 @@ var app = express()
 var env = nunjucks.configure('views', { autoescape: true, express: app })
 
 var EARTHQUAKES_ARRAY_LENGTH = 200
-var earthquakesArray = []
 
 app.get("*", function (req, res) {
-    res.render("index.html", { earthquakesArray: earthquakesArray, EARTHQUAKES_ARRAY_LENGTH: EARTHQUAKES_ARRAY_LENGTH })
+
+    var file = "index.html"
+    var toRender = {
+        EARTHQUAKES_ARRAY_LENGTH: EARTHQUAKES_ARRAY_LENGTH
+    }
+
+    fetchEarthquakes().then(function (earthquakes) {
+        render(earthquakesToObjectArray(earthquakes.split("\n")))
+    }).catch(function (err) {
+        render([])
+    })
+
+    function render(arr) {
+        toRender["earthquakesArray"] = arr
+        res.render(file, toRender)
+    }
+
 })
 
 function fetchEarthquakes() {
@@ -94,22 +109,6 @@ function earthquakesToObjectArray(rows) {
     return arr
 }
 
-function fetchEarthquakesRecursive() {
-    fetchEarthquakes()
-        .then(function (earthquakes) {
-
-            //<pre> tag içindeki veriyi satırlara bölecek şekilde array oluştur
-            var rows = earthquakes.split("\n")
-
-            // global earthquakesArray değişkenini oluştur
-            earthquakesArray = earthquakesToObjectArray(rows)
-
-            setTimeout(fetchEarthquakesRecursive, 1000 * 60)
-        })
-        .catch(console.log)
-}
-
-fetchEarthquakesRecursive()
 
 app.listen(PORT, function () {
     console.log("running on port:", PORT)
