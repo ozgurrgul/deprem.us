@@ -1,0 +1,37 @@
+{% extends "page.html" %}
+
+{% block title %}
+Deprem
+{% endblock %}
+
+{% block page %}
+
+<main class="pad-5">
+    <table class="striped highlight z-depth-1">
+        <tbody>
+        <tr>
+            <td>Tarih</td>
+            <td>{{row.date}}</td>
+        </tr>
+        <tr>
+            <td>Şiddet</td>
+            <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
+        </tr>
+        <tr>
+            <td>Derinlik</td>
+            <td>{{row.depth}}</td>
+        </tr>
+        <tr>
+            <td>Konum</td>
+            <td> <a
+                    class="map-link"
+                    href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
+                    target="_blank">
+                {{row.location}}
+            </a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+{% endblock %}

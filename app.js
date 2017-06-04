@@ -2,6 +2,7 @@ var express = require('express')
 var nunjucks = require('nunjucks')
 var request = require('request')
 var cheerio = require('cheerio')
+var crypto = require('crypto')
 var PORT = process.env.PORT || 6767
 
 var app = express()
@@ -9,7 +10,7 @@ var env = nunjucks.configure('views', { autoescape: true, express: app })
 
 var EARTHQUAKES_ARRAY_LENGTH = 200
 
-app.get("*", function (req, res) {
+app.get("/", function (req, res) {
 
     var file = "index.html"
     var toRender = {
@@ -26,6 +27,12 @@ app.get("*", function (req, res) {
         toRender["earthquakesArray"] = arr
         res.render(file, toRender)
     }
+
+})
+
+app.get("/deprem/:base64", function (req, res) {
+    var row = new Buffer(req.params.base64, 'base64').toString('ascii')
+    res.render("deprem.html", {row: JSON.parse(row)})
 
 })
 
@@ -102,6 +109,9 @@ function earthquakesToObjectArray(rows) {
             force: force,
             location: town + " " + city
         }
+
+        var base64 = new Buffer(JSON.stringify(data)).toString('base64')
+        data["base64"] = base64
 
         arr.push(data)
     }

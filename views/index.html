@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Türkiye'deki Son Depremler - Deprem.us</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{% extends "page.html" %}
 
-    <!-- for seo -->
-    <meta name="description" content="Son depremler - Deprem.us">
-    <meta name="keywords" content="Son depremler, deprem, depremler, güncel depremler">
-    <meta name="author" content="Özgür GÜL">
+{% block title %}
+Deprem
+{% endblock %}
 
-    <!-- css -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-
-    <!-- twit -->
-    <meta name="twitter:site" content="@lugrugzo">
-    <meta name="twitter:creator" content="@lugrugzo">
-    <meta name="twitter:title" content="Son depremler - Deprem.us">
-    <meta name="twitter:description" content="Son depremler, anlık bilgiler">
-
-    <style>
-        .pad-5 { padding: 5px; }
-        .map-link { color: #03a9f4; }
-        .map-link:hover { text-decoration: underline; }
-        .red-font { color: #f44336; }
-    </style>
-</head>
-<body>
-
-<nav>
-    <div class="nav-wrapper light-blue darken-1">
-        <a href="/" class="brand-logo center">Son Depremler</a>
-    </div>
-</nav>
+{% block page %}
 
 <main class="pad-5">
     <table class="striped highlight z-depth-1">
@@ -43,22 +14,25 @@
             <th>Şiddet</th>
             <th>Derinlik</th>
             <th>Konum</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for row in earthquakesArray %}
         <tr>
+
             <td>{{row.date}}</td>
             <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
             <td>{{row.depth}}</td>
             <td>
                 <a
-                    class="map-link"
-                    href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
-                    target="_blank">
-                {{row.location}}
+                        class="map-link"
+                        href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
+                        target="_blank">
+                    {{row.location}}
                 </a>
             </td>
+            <td><a href="/deprem/{{row.base64}}">Detay</a></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -67,31 +41,4 @@
 </main>
 
 
-<footer class="page-footer light-blue darken-1">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Deprem.us</h5>
-                <p class="grey-text text-lighten-4">
-                    Deprem verileri Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü'nden alınmaktadır. <br>
-                    <i>(Son {{EARTHQUAKES_ARRAY_LENGTH}} deprem listelenmektedir).</i>
-                </p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Linkler</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" target="_blank" href="https://github.com/lugrugzo">Kaynak Kod</a></li>
-                    <li><a class="grey-text text-lighten-3" target="_blank" href="https://twitter.com/lugrugzo">Twitter</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2017
-        </div>
-    </div>
-</footer>
-
-</body>
-</html>
+{% endblock %}

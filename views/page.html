@@ -1,0 +1,11 @@
+<html>
+<head>
+    {% include "libraries.html" %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% include "header.html" %}
+{% block page %}{% endblock %}
+{% include "footer.html" %}
+</body>
+</html>
