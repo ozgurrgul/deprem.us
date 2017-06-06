@@ -25,12 +25,7 @@ Deprem
             <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
             <td>{{row.depth}}</td>
             <td>
-                <a
-                        class="map-link"
-                        href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
-                        target="_blank">
-                    {{row.location}}
-                </a>
+                <a href="/deprem/{{row.base64}}">{{row.location}}</a>
             </td>
             <td><a href="/deprem/{{row.base64}}">Detay</a></td>
         </tr>
