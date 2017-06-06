@@ -1,5 +1,23 @@
-<nav>
-    <div class="nav-wrapper light-blue darken-1">
-        <a href="/" class="brand-logo center">Son Depremler</a>
+{% macro menu() %}
+<a class="mdl-navigation__link" href="/hakkinda">Hakkında</a>
+{% endmacro %}
+
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title"><a href="/" style="text-decoration: none; color: white;">Deprem.us</a></span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            {{ menu() }}
+        </nav>
     </div>
-</nav>
+</header>
+<div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Deprem.us</span>
+    <nav class="mdl-navigation">
+        {{ menu() }}
+    </nav>
+</div>
+

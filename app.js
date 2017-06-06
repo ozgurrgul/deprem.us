@@ -14,7 +14,6 @@ app.get("/", function (req, res) {
 
     var file = "index.html"
     var toRender = {
-        EARTHQUAKES_ARRAY_LENGTH: EARTHQUAKES_ARRAY_LENGTH
     }
 
     fetchEarthquakes().then(function (earthquakes) {
@@ -33,7 +32,10 @@ app.get("/", function (req, res) {
 app.get("/deprem/:base64", function (req, res) {
     var row = new Buffer(req.params.base64, 'base64').toString('ascii')
     res.render("deprem.html", {row: JSON.parse(row)})
+})
 
+app.get("/hakkinda", function (req, res) {
+    res.render("hakkinda.html", {EARTHQUAKES_ARRAY_LENGTH: EARTHQUAKES_ARRAY_LENGTH})
 })
 
 function fetchEarthquakes() {

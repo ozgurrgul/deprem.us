@@ -6,32 +6,32 @@
 
 {% block page %}
 
-<main class="pad-5">
-    <table class="striped highlight z-depth-1">
+<div style="overflow-x: scroll;" class="mdl-shadow--2dp">
+    <table class="mdl-data-table">
         <tbody>
-        <tr>
-            <td>Tarih</td>
-            <td>{{row.date}}</td>
-        </tr>
-        <tr>
-            <td>Şiddet</td>
-            <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
-        </tr>
-        <tr>
-            <td>Derinlik</td>
-            <td>{{row.depth}}</td>
-        </tr>
-        <tr>
-            <td>Konum</td>
-            <td> <a
-                    class="map-link"
-                    href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
-                    target="_blank">
-                {{row.location}}
-            </a></td>
-        </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Tarih</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.date}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Şiddet</td>
+                <td class="mdl-data-table__cell--non-numeric"><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Derinlik</td>
+                <td class="mdl-data-table__cell--non-numeric">{{row.depth}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric">Konum</td>
+                <td class="mdl-data-table__cell--non-numeric"> <a
+                        class="map-link"
+                        href="https://www.google.com/maps/@{{row.lat}},{{row.lon}},12z"
+                        target="_blank">
+                    {{row.location}} <i class="material-icons" style="font-size: 13px;">call_made</i>
+                </a></td>
+            </tr>
         </tbody>
     </table>
-</main>
+</div>
 
 {% endblock %}

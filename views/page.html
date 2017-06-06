@@ -4,8 +4,19 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-{% include "header.html" %}
-{% block page %}{% endblock %}
-{% include "footer.html" %}
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    {% include "header.html" %}
+
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            {% block page %}{% endblock %}
+        </div>
+
+        {% include "footer.html" %}
+    </main>
+</div>
+
 </body>
 </html>

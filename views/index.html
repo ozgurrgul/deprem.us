@@ -6,34 +6,33 @@ Türkiye'deki Son Depremler - Deprem.us
 
 {% block page %}
 
-<main class="pad-5">
-    <table class="striped highlight z-depth-1">
+<div style="overflow-x: scroll;" class="mdl-shadow--2dp">
+    <table class="mdl-data-table">
         <thead>
         <tr>
-            <th>Tarih</th>
+            <th class="mdl-data-table__cell--non-numeric">Tarih</th>
             <th>Şiddet</th>
             <th>Derinlik</th>
-            <th>Konum</th>
-            <th></th>
+            <th class="mdl-data-table__cell--non-numeric">Konum</th>
+            <th class="mdl-data-table__cell--non-numeric">Detay</th>
         </tr>
         </thead>
         <tbody>
         {% for row in earthquakesArray %}
         <tr>
 
-            <td>{{row.date}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{row.date}}</td>
             <td><strong class="{{ 'red-font' if (row.force > 3) else '' }}">{{row.force}}</strong></td>
             <td>{{row.depth}}</td>
-            <td>
+            <td class="mdl-data-table__cell--non-numeric">
                 <a href="/deprem/{{row.base64}}">{{row.location}}</a>
             </td>
-            <td><a href="/deprem/{{row.base64}}">Detay</a></td>
+            <td class="mdl-data-table__cell--non-numeric"><a href="/deprem/{{row.base64}}">Detay</a></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
-
-</main>
+</div>
 
 
 {% endblock %}
